@@ -22,7 +22,7 @@ function getActivityList(registrationId){
             $('#progressbar').attr('max',datacount);
         
             for(x=0;x<data.length;x++){
-                storeData(data[x].item_group, data[x].item_code, data[x].type, data[x].desc,    data[x].desc2, data[x].UOM, data[x].PRICE1, data[x].PRICE2,data[x].PRICE_MIN, data[x].BALANCEQTY,data[x].last_price,data[x].SyncDate);
+                storeData(data[x].item_group, data[x].item_code, data[x].type, data[x].desc, data[x].desc2, data[x].UOM, data[x].PRICE1, data[x].PRICE2,data[x].PRICE_MIN, data[x].BALANCEQTY,data[x].last_price,data[x].SyncDate);
             }
         
         },
@@ -41,7 +41,7 @@ function deleteData(){
     
     db.transaction(
         function(txx) {
-            txx.executeSql('DROP TABLE IF EXISTS pcn_table');
+            //txx.executeSql('DROP TABLE IF EXISTS pcn_table');
             txx.executeSql('CREATE TABLE IF NOT EXISTS pcn_table (item_group TEXT, item_code TEXT, type TEXT, desc TEXT, desc2 TEXT, UOM TEXT, PRICE1 TEXT, PRICE2 TEXT,PRICE_MIN TEXT, BALANCEQTY TEXT, last_price TEXT, SyncDate TEXT)');
             //OnsuccessDelete,
             //OnerrorDelete
@@ -52,7 +52,6 @@ function deleteData(){
 
 function storeData(item_group, item_code, type, desc, desc2, UOM, PRICE1, PRICE2,PRICE_MIN, BALANCEQTY, last_price, SyncDate) {
 
-    //var db = window.sqlitePlugin.openDatabase("Database", "1.0", "MANUFACTURE", 200000);
     var data = {
         values1 : [item_group, item_code, type, desc, desc2, UOM, PRICE1, PRICE2,PRICE_MIN, BALANCEQTY, last_price, SyncDate]
     };
@@ -62,9 +61,6 @@ function storeData(item_group, item_code, type, desc, desc2, UOM, PRICE1, PRICE2
     function insertData(data) {
         
         db.transaction(function(tx) {
-            //tx.executeSql('DROP TABLE IF EXISTS DATA');
-            //tx.executeSql('create table if not exists DATA(item_group TEXT, item_code TEXT, type TEXT, desc TEXT, desc2 TEXT, UOM TEXT, PRICE1 TEXT, PRICE2 TEXT,PRICE_MIN TEXT, BALANCEQTY TEXT, last_price TEXT, SyncDate TEXT)');
-            //tx.executeSql('DELETE FROM DATA');
             tx.executeSql(
                 'INSERT INTO pcn_table(item_group, item_code, type, desc, desc2, UOM, PRICE1, PRICE2,PRICE_MIN, BALANCEQTY, last_price, SyncDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
                 data.values1,
