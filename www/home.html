@@ -16,7 +16,7 @@
         <script type="text/javascript" src="js/common.js"></script>
         <link rel="stylesheet" type="text/css" href="css/home.css" />
         <link rel="stylesheet" type="text/css" href="css/common.css" />
-       <script type="text/javascript">
+        <script type="text/javascript">
             document.addEventListener("deviceready", onDeviceReady, false);         
             function onDeviceReady() {
                 document.addEventListener("backbutton", onBackKeyDown, false);       
@@ -33,6 +33,10 @@
                     navigator.app.exitApp();// Otherwise we quit the app.
                 }
             }
+            
+            function OnClickSearch() {
+                window.location.href="search.html";   
+            }
         </script>
     
 
@@ -44,8 +48,8 @@
                 <img class="logo" src="img/pcn.png"/>
                 <br>
                 <button class="btnsync" onclick="syncOnClick();"><img class="imgsync" src='img/sync.png'/></button><br>
-                <button class="btnsearch" onclick="searchOnClick();"><img class="imgsearch" src="img/search.png"/></button>
-               
+                <!--<button class="btnsearch" onclick="searchOnClick();"><img class="imgsearch" src="img/search.png"/></button>-->
+                <button class="btnsearch" onclick="OnClickSearch();"><img class="imgsearch" src="img/search.png"/></button>
 
                 <progress id="progressbar" class="progressbar" value="0" max="100"></progress>
             </div> 

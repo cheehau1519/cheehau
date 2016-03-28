@@ -59,41 +59,20 @@ var input2;
 function searchOnClick(){
 
         
-   $(".app").append("
-        <div class='PwdBg'>
-            <div class='PwdContent'>
-                <div class='PwdHeader'>
-                    <button class='PwdTitle'>Search / 搜寻</button>
-                    <button class='PwdCloseBtn' onclick='closePwd();'><img src='img/close.png'/></button>
-                </div>
-                <div class='PwdDetails'>
-                    <select class='dropdown'>
-                        <option value=''></option>
-                    </select>
-                    </input>
-                    <input class='inputcode' placeholder='ITEM CODE / 物品代码'></input>
-                    <button class=btnSearch onclick='btnSearch();'>Search / 搜寻</button>
-                </div>
-            </div>
-        </div>");
+   $(".app").append("<div class='PwdBg'><div class='PwdContent'><div class='PwdHeader'><button class='PwdTitle'>Search / 搜寻</button><button class='PwdCloseBtn' onclick='closePwd();'><img src='img/close.png'/></button></div><div class='PwdDetails'><select class='dropdown'><option value=''></option></select></input><input class='inputcode' placeholder='ITEM CODE / 物品代码'></input><button class=btnSearch onclick='btnSearch();'>Search / 搜寻</button></div></div>");
     
-    dbmanager.initdb();
+     dbmanager.initdb();
     dbmanager.getAllGroup(function(returnData){
 
     for (y=0;y<returnData.rows.length;y++){  
-        var name=returnData.rows.item(y).item_group;
-        $(".dropdown").append($("<option></option>").attr("value",name).text(name));
+    var name=returnData.rows.item(y).item_group;
+   $(".dropdown").append($("<option></option>").attr("value",name).text(name));
+
+  
    
     }
-})
+    })
         
-}
-function closePwd(){
-    $(".PwdBg").remove();
-}
-
-function closePwd2(){
-    $(".PwdBg2").remove();
 }
 
 function btnSearch(){

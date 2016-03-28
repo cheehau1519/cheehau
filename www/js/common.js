@@ -2,14 +2,14 @@
 var db;
 var dbmanager = {
     initdb:function(){
-        db = window.sqlitePlugin.openDatabase("Database", "1.0", "MANUFACTURE", 200000);
+        db = window.sqlitePlugin.openDatabase({name: "pcn.db"});
     },
     
 
     //select all data
     getData:function(returnData){
         db.transaction(function(tx){
-            tx.executeSql('SELECT * FROM DATA', [], function(tx, rs){
+            tx.executeSql('SELECT TOP 10 * FROM pcn_table', [], function(tx, rs){
                 returnData(rs);
           }, this.errorExecuteSQL);
         });
@@ -19,7 +19,7 @@ var dbmanager = {
 
        //search data only if item group is provided
         db.transaction(function(tx){
-            tx.executeSql("SELECT * FROM DATA WHERE item_group LIKE '"+input1+"' ORDER BY item_code;", [], function(tx, rs){
+            tx.executeSql("SELECT TOP 10 * FROM pcn_table WHERE item_group LIKE '"+input1+"' ORDER BY item_code;", [], function(tx, rs){
                 returnData(rs);
           }, this.errorExecuteSQL);
         });
@@ -32,7 +32,7 @@ var dbmanager = {
 
        //search data only if item code is provided
         db.transaction(function(tx){
-            tx.executeSql("SELECT * FROM DATA WHERE item_code LIKE '"+input2+"%' ORDER BY item_code;", [], function(tx, rs){
+            tx.executeSql("SELECT TOP 10 * FROM pcn_table WHERE item_code LIKE '"+input2+"%' ORDER BY item_code;", [], function(tx, rs){
                 returnData(rs);
           }, this.errorExecuteSQL);
         });
@@ -44,7 +44,7 @@ var dbmanager = {
 
         //search data if group and code are provided
         db.transaction(function(tx){
-            tx.executeSql("SELECT * FROM DATA WHERE item_group LIKE '"+input1+"' AND item_code LIKE '"+input2+"%' ORDER BY item_code;", [], function(tx, rs){
+            tx.executeSql("SELECT TOP 10 * FROM pcn_table WHERE item_group LIKE '"+input1+"' AND item_code LIKE '"+input2+"%' ORDER BY item_code;", [], function(tx, rs){
                 returnData(rs);
           }, this.errorExecuteSQL);
         });
@@ -56,7 +56,7 @@ var dbmanager = {
          
         //for drop down get all item group
         db.transaction(function(tx){
-            tx.executeSql("SELECT item_group from DATA WHERE item_group IS NOT NULL GROUP BY item_group ORDER BY item_group;", [], function(tx, rs){
+            tx.executeSql("SELECT item_group from pcn_table WHERE item_group IS NOT NULL GROUP BY item_group ORDER BY item_group;", [], function(tx, rs){
                 returnData(rs);
           }, this.errorExecuteSQL);
         });
